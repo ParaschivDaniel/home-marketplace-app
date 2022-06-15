@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import {
 	getAuth,
@@ -9,6 +10,7 @@ import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase.config';
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg';
 import visibilityIcon from '../assets/svg/visibilityIcon.svg';
+import OAuth from '../components/OAuth';
 
 const SignUp = () => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -54,7 +56,7 @@ const SignUp = () => {
 
 			navigate('/');
 		} catch (error) {
-			console.log(error);
+			toast.error('Something went wrong with registration.');
 		}
 	};
 
@@ -108,8 +110,11 @@ const SignUp = () => {
 						</button>
 					</div>
 				</form>
+
+				<OAuth />
+
 				<Link to='/sign-in' className='registerLink'>
-					Back to Sign In
+					Sign In Instead
 				</Link>
 			</div>
 		</div>
